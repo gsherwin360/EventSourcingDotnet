@@ -66,7 +66,7 @@ public class ProductTests
 		int expectedNumberOfStocks = existingProduct.NumberOfStocks + adjustment;
 
 		// Act
-		existingProduct.AdjustStocks(adjustment);
+		existingProduct.AdjustStock(adjustment);
 
 		// Assert
 		existingProduct.Should().NotBeNull();

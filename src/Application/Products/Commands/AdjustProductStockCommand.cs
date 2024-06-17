@@ -25,7 +25,7 @@ public sealed class AdjustProductStockCommandHandler : IRequestHandler<AdjustPro
 			
 		var oldVersion = existingProduct.Version;
 
-		existingProduct.AdjustStocks(command.Adjustment);
+		existingProduct.AdjustStock(command.Adjustment);
 		await this.persistence.SaveAsync(existingProduct, oldVersion, cancellationToken);
 
 		return Result<bool>.Success(true);

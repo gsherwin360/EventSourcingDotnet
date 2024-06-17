@@ -45,11 +45,11 @@ public class Product : Aggregate
 		this.Enqueue(@event);
 	}
 
-	public void AdjustStocks(int adjustment)
+	public void AdjustStock(int adjustment)
 	{
 		if (adjustment == 0) return;
 
-		var @event = ProductStocksAdjustedEvent.Create(adjustment);
+		var @event = ProductStockAdjustedEvent.Create(adjustment);
 		this.Apply(@event);
 		this.Enqueue(@event);
 	}
@@ -64,8 +64,8 @@ public class Product : Aggregate
 			case ProductDetailsUpdatedEvent productDetailsUpdatedEvent:
 				this.ApplyEvent(productDetailsUpdatedEvent);
 				break;
-			case ProductStocksAdjustedEvent numberOfStocksUpdatedEvent:
-				this.ApplyEvent(numberOfStocksUpdatedEvent);
+			case ProductStockAdjustedEvent productStockAdjustedEvent:
+				this.ApplyEvent(productStockAdjustedEvent);
 				break;
 			default:
 				return;
@@ -91,7 +91,7 @@ public class Product : Aggregate
 		this.LastModifiedDate = @event.When;
 	}
 
-	public void ApplyEvent(ProductStocksAdjustedEvent @event)
+	public void ApplyEvent(ProductStockAdjustedEvent @event)
 	{
 		this.NumberOfStocks += @event.Adjustment;
 		this.LastModifiedDate = @event.When;
